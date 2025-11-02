@@ -7,6 +7,7 @@ const connectDB = require("./config/db");
 const authRouter = require("./routes/authRoutes");
 const bookRouter = require("./routes/bookRoutes");
 const aiRouter = require("./routes/aiRoutes");
+const exportRouter = require("./routes/exportRoutes");
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use("/backend/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/auth", authRouter);
 app.use("/api/books", bookRouter);
 app.use("/api/ai", aiRouter);
+app.use("/api/export", exportRouter);
 
 // db connection and start server
 const PORT = process.env.PORT;
