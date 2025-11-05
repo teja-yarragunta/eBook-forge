@@ -24,7 +24,7 @@ const NavBar = () => {
 
   return (
     <header>
-      <div className="max-7-xl mx-auto px-8 lg:px-10">
+      <div className="max-w-7xl mx-auto px-8 lg:px-10">
         <div className="flex items-center justify-between h-20">
           {/* logo */}
           <a href="/" className="flex items-center space-x-3.5 group">
@@ -91,12 +91,13 @@ const NavBar = () => {
 
       {/* mobile menu */}
       {isOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-20 bg-white border-b border-gray-100 shadow-lg transform transition-all duration-300 ease-in-out">
+        <div className="lg:hidden fixed inset-x-0 top-20 bg-white border-b border-gray-100 shadow-lg transform transition-all duration-300 ease-in-out z-50">
           <nav className="px-5 py-5 space-y-2">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
+                onClick={() => setIsOpen(false)}
                 className="block px-5 py-3 text-sm font-medium text-gray-600 hover:text-violet-600 hover:bg-violet-50 rounded-lg transition-colors duration-200"
               >
                 {link.name}
