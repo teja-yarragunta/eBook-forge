@@ -1,7 +1,99 @@
 import React from "react";
+import { ChevronDown, LogOut, User } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-const ProfileDropdown = () => {
-  return <div>ProfileDropdown</div>;
+const ProfileDropdown = ({
+  isOpen,
+  onToggle,
+  avatar,
+  name,
+  email,
+  userRole,
+  onLogout,
+}) => {
+  const navigate = useNavigate();
+  return (
+    <div className="relative">
+      <button
+        onClick={onToggle}
+        type="button"
+        aria-expanded={isOpen}
+        className="flex items-center gap-3 px-2 py-1.5 rounded-lg hover:bg-violet-50 transition-colors"
+      >
+        {avatar ? (
+          <img
+            src={avatar}
+            alt="avatar"
+            className="h-10 w-10 rounded-xl object-cover ring-2 ring-white shadow"
+          />
+        ) : (
+          <div className="h-10 w-10 bg-linear-to-br from-violet-400 to-violet-500 rounded-xl flex items-center justify-center shadow">
+            <span className="text-white font-semibold text-base">
+              {name.charAt(0).toUpperCase()}
+            </span>
+          </div>
+        )}
+        <div className="hidden sm:block text-left">
+          <p className="text-sm font-medium text-gray-900 leading-tight">
+            {name}
+          </p>
+          <p className="text-xs text-gray-600 leading-tight">{email}</p>
+        </div>
+        <ChevronDown className="w-4 h-4 text-gray-500" />
+      </button>
+
+      {isOpen && (
+        <div className="absolute right-0 mt-2 w-72 bg-white border border-gray-100 rounded-xl shadow-lg z-50">
+          <div className="px-4 py-3 border-b border-gray-100">
+            <div className="flex items-center gap-3">
+              {avatar ? (
+                <img
+                  src={avatar}
+                  alt="avatar"
+                  className="h-10 w-10 rounded-xl object-cover ring-2 ring-white shadow"
+                />
+              ) : (
+                <div className="h-10 w-10 bg-linear-to-br from-violet-400 to-violet-500 rounded-xl flex items-center justify-center shadow">
+                  <span className="text-white font-semibold text-base">
+                    {name.charAt(0).toUpperCase()}
+                  </span>
+                </div>
+              )}
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-gray-900 truncate">
+                  {name}
+                </p>
+                <p className="text-xs text-gray-600 truncate">{email}</p>
+                {userRole ? (
+                  <span className="mt-1 inline-block text-[10px] font-medium text-violet-700 bg-violet-50 px-2 py-0.5 rounded">
+                    {userRole}
+                  </span>
+                ) : null}
+              </div>
+            </div>
+          </div>
+          <div className="py-1">
+            <button
+              onClick={() => navigate("/profile")}
+              className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:text-violet-700 hover:bg-violet-50 transition-colors"
+            >
+              <User className="w-4 h-4" />
+              <span>View Profile</span>
+            </button>
+          </div>
+          <div className="py-1 border-t border-gray-100">
+            <button
+              onClick={onLogout}
+              className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:text-red-600 hover:bg-red-50 transition-colors"
+            >
+              <LogOut className="w-4 h-4" />
+              <span>Sign Out</span>
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default ProfileDropdown;
