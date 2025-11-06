@@ -9,7 +9,7 @@ const exportRouter = express.Router();
 
 exportRouter.use(authUser);
 
-exportRouter.post("/:id/doc", exportAsDocument);
-exportRouter.post("/:id/pdf", exportAsPDF);
+exportRouter.get("/pdf/:id", exportAsPDF);
+exportRouter.get("/doc/:id", exportAsDocument);
 
 module.exports = exportRouter;
