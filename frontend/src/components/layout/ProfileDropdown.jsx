@@ -1,5 +1,5 @@
 import React from "react";
-import { ChevronDown, LogOut, User } from "lucide-react";
+import { ChevronDown, LogOut, User, LayoutDashboard } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const ProfileDropdown = ({
@@ -10,10 +10,10 @@ const ProfileDropdown = ({
   email = "",
   userRole = "",
   onLogout = () => {},
+  showDashboardLink = false, // ✅ new prop
 }) => {
   const navigate = useNavigate();
 
-  // Safe initial letter fallback
   const firstLetter =
     typeof name === "string" && name.trim().length > 0
       ? name.charAt(0).toUpperCase()
@@ -21,6 +21,7 @@ const ProfileDropdown = ({
 
   return (
     <div className="relative">
+      {/* Dropdown Trigger */}
       <button
         onClick={onToggle}
         type="button"
@@ -51,11 +52,13 @@ const ProfileDropdown = ({
         <ChevronDown className="w-4 h-4 text-gray-500" />
       </button>
 
+      {/* Dropdown Menu */}
       {isOpen && (
         <div
           className="absolute right-0 mt-2 w-72 bg-white border border-gray-100 rounded-xl shadow-lg z-50"
           onClick={(e) => e.stopPropagation()}
         >
+          {/* Header */}
           <div className="px-4 py-3 border-b border-gray-100">
             <div className="flex items-center gap-3">
               {avatar ? (
@@ -87,7 +90,18 @@ const ProfileDropdown = ({
             </div>
           </div>
 
+          {/* Links Section */}
           <div className="py-1">
+            {showDashboardLink && (
+              <button
+                onClick={() => navigate("/dashboard")}
+                className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:text-violet-700 hover:bg-violet-50 transition-colors"
+              >
+                <LayoutDashboard className="w-4 h-4" />
+                <span>Dashboard</span>
+              </button>
+            )}
+
             <button
               onClick={() => navigate("/profile")}
               className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:text-violet-700 hover:bg-violet-50 transition-colors"
@@ -97,6 +111,7 @@ const ProfileDropdown = ({
             </button>
           </div>
 
+          {/* Logout Section */}
           <div className="py-1 border-t border-gray-100">
             <button
               onClick={onLogout}

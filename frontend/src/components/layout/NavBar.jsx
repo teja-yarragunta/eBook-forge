@@ -61,6 +61,7 @@ const NavBar = () => {
                 email={user?.email || ""}
                 userRole={user?.role || ""}
                 onLogout={logout}
+                showDashboardLink={true}
               />
             ) : (
               <>
@@ -121,6 +122,16 @@ const NavBar = () => {
                     <div className="text-xs text-gray-600">{user?.email}</div>
                   </div>
                 </div>
+
+                {/* Dashboard Link */}
+                <a
+                  href="/dashboard"
+                  onClick={() => setIsOpen(false)}
+                  className="w-full flex items-center justify-center space-x-2 px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-violet-700 bg-gray-50 hover:bg-violet-50 rounded-lg transition-colors duration-200"
+                >
+                  <BookOpen className="w-4 h-4" />
+                  <span>Dashboard</span>
+                </a>
 
                 {/* View Profile button */}
                 <a
