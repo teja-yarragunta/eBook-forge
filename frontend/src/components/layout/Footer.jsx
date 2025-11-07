@@ -12,7 +12,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="border-t border-gray-100 bg-white">
+    <footer className="border-t border-gray-100 bg-linear-to-br from-purple-200 to purple-100">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
