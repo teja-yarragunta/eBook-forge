@@ -3,15 +3,22 @@ import { ChevronDown, LogOut, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const ProfileDropdown = ({
-  isOpen,
-  onToggle,
-  avatar,
-  name,
-  email,
-  userRole,
-  onLogout,
+  isOpen = false,
+  onToggle = () => {},
+  avatar = "",
+  name = "",
+  email = "",
+  userRole = "",
+  onLogout = () => {},
 }) => {
   const navigate = useNavigate();
+
+  // Safe initial letter fallback
+  const firstLetter =
+    typeof name === "string" && name.trim().length > 0
+      ? name.charAt(0).toUpperCase()
+      : "U";
+
   return (
     <div className="relative">
       <button
@@ -27,23 +34,28 @@ const ProfileDropdown = ({
             className="h-10 w-10 rounded-xl object-cover ring-2 ring-white shadow"
           />
         ) : (
-          <div className="h-10 w-10 bg-linear-to-br from-violet-400 to-violet-500 rounded-xl flex items-center justify-center shadow">
+          <div className="h-10 w-10 bg-gradient-to-br from-violet-400 to-violet-500 rounded-xl flex items-center justify-center shadow">
             <span className="text-white font-semibold text-base">
-              {name.charAt(0).toUpperCase()}
+              {firstLetter}
             </span>
           </div>
         )}
+
         <div className="hidden sm:block text-left">
           <p className="text-sm font-medium text-gray-900 leading-tight">
-            {name}
+            {name || "User"}
           </p>
-          <p className="text-xs text-gray-600 leading-tight">{email}</p>
+          <p className="text-xs text-gray-600 leading-tight">{email || "—"}</p>
         </div>
+
         <ChevronDown className="w-4 h-4 text-gray-500" />
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-72 bg-white border border-gray-100 rounded-xl shadow-lg z-50">
+        <div
+          className="absolute right-0 mt-2 w-72 bg-white border border-gray-100 rounded-xl shadow-lg z-50"
+          onClick={(e) => e.stopPropagation()}
+        >
           <div className="px-4 py-3 border-b border-gray-100">
             <div className="flex items-center gap-3">
               {avatar ? (
@@ -53,25 +65,28 @@ const ProfileDropdown = ({
                   className="h-10 w-10 rounded-xl object-cover ring-2 ring-white shadow"
                 />
               ) : (
-                <div className="h-10 w-10 bg-linear-to-br from-violet-400 to-violet-500 rounded-xl flex items-center justify-center shadow">
+                <div className="h-10 w-10 bg-gradient-to-br from-violet-400 to-violet-500 rounded-xl flex items-center justify-center shadow">
                   <span className="text-white font-semibold text-base">
-                    {name.charAt(0).toUpperCase()}
+                    {firstLetter}
                   </span>
                 </div>
               )}
               <div className="min-w-0">
                 <p className="text-sm font-semibold text-gray-900 truncate">
-                  {name}
+                  {name || "User"}
                 </p>
-                <p className="text-xs text-gray-600 truncate">{email}</p>
-                {userRole ? (
+                <p className="text-xs text-gray-600 truncate">
+                  {email || "example@email.com"}
+                </p>
+                {userRole && (
                   <span className="mt-1 inline-block text-[10px] font-medium text-violet-700 bg-violet-50 px-2 py-0.5 rounded">
                     {userRole}
                   </span>
-                ) : null}
+                )}
               </div>
             </div>
           </div>
+
           <div className="py-1">
             <button
               onClick={() => navigate("/profile")}
@@ -81,6 +96,7 @@ const ProfileDropdown = ({
               <span>View Profile</span>
             </button>
           </div>
+
           <div className="py-1 border-t border-gray-100">
             <button
               onClick={onLogout}

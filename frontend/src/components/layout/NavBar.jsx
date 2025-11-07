@@ -60,7 +60,7 @@ const NavBar = () => {
                 name={user?.name || ""}
                 email={user?.email || ""}
                 userRole={user?.role || ""}
-                onLogout={() => console.log("logout")}
+                onLogout={logout}
               />
             ) : (
               <>
@@ -109,7 +109,7 @@ const NavBar = () => {
             {isAuthenticated ? (
               <div className="space-y-4">
                 <div className="flex items-center space-x-3 px-2">
-                  <div className="h-10 w-10 bg-linear-to-br from-violet-400 to-violet-500 rounded-xl flex items-center justify-center">
+                  <div className="h-10 w-10 bg-gradient-to-br from-violet-400 to-violet-500 rounded-xl flex items-center justify-center">
                     <span className="text-white font-semibold text-base">
                       {user?.name?.charAt(0).toUpperCase()}
                     </span>
@@ -121,8 +121,23 @@ const NavBar = () => {
                     <div className="text-xs text-gray-600">{user?.email}</div>
                   </div>
                 </div>
+
+                {/* View Profile button */}
+                <a
+                  href="/profile"
+                  onClick={() => setIsOpen(false)}
+                  className="w-full flex items-center justify-center space-x-2 px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-violet-700 bg-gray-50 hover:bg-violet-50 rounded-lg transition-colors duration-200"
+                >
+                  <BookOpen className="w-4 h-4" />
+                  <span>View Profile</span>
+                </a>
+
+                {/* Sign out button */}
                 <button
-                  onClick={() => logout()}
+                  onClick={() => {
+                    setIsOpen(false);
+                    logout();
+                  }}
                   className="w-full flex items-center justify-center space-x-2 px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-red-600 bg-gray-50 hover:bg-red-50 rounded-lg transition-colors duration-200"
                 >
                   <LogOut className="w-4 h-4" />
@@ -139,7 +154,7 @@ const NavBar = () => {
                 </a>
                 <a
                   href="/signup"
-                  className="block w-full text-center px-4 py-2.5 text-sm font-medium text-white bg-linear-to-br from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 rounded-lg transition-colors duration-200"
+                  className="block w-full text-center px-4 py-2.5 text-sm font-medium text-white bg-gradient-to-br from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 rounded-lg transition-colors duration-200"
                 >
                   Get Started
                 </a>
