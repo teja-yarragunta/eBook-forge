@@ -25,6 +25,7 @@ const BookCardSkeleton = () => (
 const DashboardPage = () => {
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -54,7 +55,9 @@ const DashboardPage = () => {
     }
   };
 
-  const handleCreateBookClick = () => navigate("/create-book");
+  const handleBookCreate = () => {
+    setIsCreateModalOpen(true);
+  };
 
   return (
     <DashboardLayout>
@@ -68,7 +71,7 @@ const DashboardPage = () => {
           </div>
           <Button
             className="whitespace-nowrap"
-            onClick={handleCreateBookClick}
+            onClick={handleBookCreate}
             icon={Plus}
           >
             Create New eBook
@@ -95,7 +98,7 @@ const DashboardPage = () => {
               first one.
             </p>
             <Button
-              onClick={handleCreateBookClick}
+              onClick={handleBookCreate}
               icon={Plus}
               className="bg-linear-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 text-white font-medium rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
             >
@@ -113,6 +116,14 @@ const DashboardPage = () => {
             ))}
           </div>
         )}
+        <CreateBookModal
+          isOpen={isCreateModalOpen}
+          onClose={() => setIsCreateModalOpen(false)}
+          onBookCreated={(bookId) => {
+            setIsCreateModalOpen(false);
+            navigate(`/editor/${bookId}`);
+          }}
+        />
       </div>
     </DashboardLayout>
   );
