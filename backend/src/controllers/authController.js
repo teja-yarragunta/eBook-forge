@@ -7,7 +7,7 @@ const { validateSignup } = require("../utils/validateSignup");
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     algorithm: "HS256",
-    expiresIn: "1d",
+    expiresIn: "7d",
   });
 };
 
