@@ -52,7 +52,7 @@ const SimpleMDEditor = ({ value, onChange, options = {} }) => {
             commands.checkedListCommand,
           ]}
           textareaProps={{ ...textareaProps, ...(options.textareaProps || {}) }}
-          className="!bg-white !text-gray-900"
+          className="bg-white! text-gray-900!"
           // pass other options
           {...options}
         />

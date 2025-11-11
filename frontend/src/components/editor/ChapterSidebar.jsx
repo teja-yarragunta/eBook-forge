@@ -176,7 +176,7 @@ const ChapterSidebar = ({
         <Button
           variant="secondary"
           onClick={onAddChapter}
-          className="w-full bg-gradient-to-r from-violet-500 to-purple-600 text-white font-medium rounded-lg shadow-sm"
+          className="w-full bg-linear-to-r from-violet-500 to-purple-600 text-white font-medium rounded-lg shadow-sm"
           icon={Plus}
         >
           New Chapter

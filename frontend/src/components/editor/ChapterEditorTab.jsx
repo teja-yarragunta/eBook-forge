@@ -156,10 +156,10 @@ const ChapterEditorTab = ({
             {currentChapter.title}
           </h2>
 
-          <div className="max-w-none break-words">
+          <div className="max-w-none wrap-break-words">
             <MDEditor.Markdown
               source={currentChapter.content || ""}
-              className="wmde-markdown max-w-none break-words"
+              className="wmde-markdown max-w-none wrap-break-words"
               style={{
                 backgroundColor: "white",
                 color: "#111827",
