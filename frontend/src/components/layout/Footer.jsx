@@ -5,10 +5,10 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   const socials = [
-    { name: "GitHub", href: "https://github.com/", Icon: Github },
-    { name: "Instagram", href: "https://www.instagram.com/", Icon: Instagram },
-    { name: "LinkedIn", href: "https://www.linkedin.com/", Icon: Linkedin },
-    { name: "Email", href: "mailto:hello@example.com", Icon: Mail },
+    { name: "GitHub", href: "https://github.com/teja-yarragunta", Icon: Github },
+    { name: "Instagram", href: "https://www.instagram.com/tejayarragunta/", Icon: Instagram },
+    { name: "LinkedIn", href: "https://www.linkedin.com/in/teja-yarragunta/", Icon: Linkedin },
+    { name: "Email", href: "mailto:mail.yarragunta.teja@gmail.com", Icon: Mail },
   ];
 
   return (
