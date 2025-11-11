@@ -54,8 +54,9 @@ export const AuthProvider = ({ children }) => {
     window.location.href = "/";
   };
 
-  const updateUser = (updatedUserData) => {
-    const newUserData = { ...user, ...updateUserData };
+  const updateUser = (updatedUserData = {}) => {
+    if (!updatedUserData) return;
+    const newUserData = { ...user, ...updatedUserData };
     localStorage.setItem("user", JSON.stringify(newUserData));
     setUser(newUserData);
   };
