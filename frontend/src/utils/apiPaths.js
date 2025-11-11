@@ -19,7 +19,7 @@ export const API_PATHS = {
     GENERATE_CHAPTER_CONTENT: "/api/ai/generate-chapter-content",
   },
   EXPORT: {
-    PDF: "/api/export",
-    DOC: "/api/export",
+    PDF: "/api/export/pdf",
+    DOC: "/api/export/doc",
   },
 };
