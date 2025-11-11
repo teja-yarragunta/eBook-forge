@@ -19,12 +19,14 @@
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "fs": "^0.0.1-security",
+    "html-to-docx": "^1.8.0",
     "jsonwebtoken": "^9.0.2",
     "markdown-it": "^14.1.0",
     "mongoose": "^8.19.2",
     "multer": "^2.0.2",
     "path": "^0.12.7",
     "pdfkit": "^0.17.2",
+    "puppeteer": "^24.29.1",
     "validator": "^13.15.20"
   },
   "devDependencies": {
