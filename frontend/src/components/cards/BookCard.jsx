@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../../utils/apiPaths";
 import { Edit, Trash2, X, AlertTriangle } from "lucide-react";
 
 const BookCard = ({ book, onDelete }) => {
   const navigate = useNavigate();
   const [showConfirm, setShowConfirm] = useState(false);
 
-  const coverImageUrl = book.coverImage
-    ? `${BASE_URL}${book.coverImage}`.replace(/\\/g, "/")
+  // ✅ Directly use the Cloudinary URL (no BASE_URL prefix needed)
+  const coverImageUrl = book.coverImage?.startsWith("http")
+    ? book.coverImage
     : "";
 
   return (

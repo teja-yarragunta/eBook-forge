@@ -1,4 +1,5 @@
 const bookModel = require("../models/Book");
+const cloudinary = require("../config/cloudinary");
 
 // @desc - create a new book
 // @route - POST /api/books
@@ -85,28 +86,49 @@ exports.updateBookById = async (req, res) => {
   }
 };
 
-// @desc - update a book's cover image
+// @desc - Update a book's cover image
 // @route - PUT /api/books/cover/:id
-// @access - private
+// @access - Private
 exports.updateBookCoverImage = async (req, res) => {
   try {
     const book = await bookModel.findById(req.params.id);
+
     if (!book) {
       return res.status(404).json({ message: "Book not found" });
     }
+
     if (book.userId.toString() !== req.user._id.toString()) {
-      return res
-        .status(401)
-        .json({ message: "not authorized to update this book cover page" });
+      return res.status(401).json({
+        message: "Not authorized to update this book cover page",
+      });
     }
-    if (req.file) {
-      book.coverImage = `/${req.file.path}`;
-    } else {
-      return res.status(400).json({ message: "no image file uploaded" });
+
+    if (!req.file || !req.file.path) {
+      return res.status(400).json({ message: "No image file uploaded" });
     }
-    const updatedBookCoverImage = await book.save();
-    res.status(200).json(updatedBookCoverImage);
+
+    // ✅ Delete old image from Cloudinary if exists
+    if (book.coverImagePublicId) {
+      try {
+        await cloudinary.uploader.destroy(book.coverImagePublicId);
+        console.log("Old cover image deleted:", book.coverImagePublicId);
+      } catch (err) {
+        console.warn("Error deleting old cover image:", err.message);
+      }
+    }
+
+    // ✅ Save new image details
+    book.coverImage = req.file.path; // Cloudinary URL
+    book.coverImagePublicId = req.file.filename; // Cloudinary public_id
+
+    const updatedBook = await book.save();
+
+    res.status(200).json({
+      message: "Book cover updated successfully",
+      book: updatedBook,
+    });
   } catch (error) {
+    console.error("Error updating book cover:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };

@@ -37,7 +37,11 @@ const bookSchema = new mongoose.Schema(
       required: true,
     },
     coverImage: {
-      type: String,
+      type: String, // Cloudinary image URL
+      default: "",
+    },
+    coverImagePublicId: {
+      type: String, // Cloudinary public_id (for deletion/replacement)
       default: "",
     },
     chapters: [chapterSchema],
