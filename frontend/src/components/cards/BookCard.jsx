@@ -19,7 +19,7 @@ const BookCard = ({ book, onDelete }) => {
         className="group relative bg-white rounded-xl overflow-hidden border border-gray-100 hover:border-violet-200 shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer"
       >
         {/* Cover Image */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+        <div className="relative overflow-hidden bg-linear-to-br from-gray-50 to-gray-100">
           {coverImageUrl ? (
             <img
               src={coverImageUrl}
