@@ -19,18 +19,18 @@ const BookCard = ({ book, onDelete }) => {
         className="group relative bg-white rounded-xl overflow-hidden border border-gray-100 hover:border-violet-200 shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer"
       >
         {/* Cover Image */}
-        <div className="relative overflow-hidden bg-linear-to-br from-gray-50 to-gray-100">
+        <div className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
           {coverImageUrl ? (
             <img
               src={coverImageUrl}
               alt={book.title}
-              className="w-full aspect-16/20 object-cover transition-transform duration-500 group-hover:scale-105"
+              className="w-full aspect-3/4 object-contain transition-transform duration-500 group-hover:scale-105 bg-white"
               onError={(e) => {
                 e.target.src = "/placeholder-book.png";
               }}
             />
           ) : (
-            <div className="aspect-16/20 flex items-center justify-center bg-gray-100 text-gray-400 text-sm">
+            <div className="aspect-3/4 flex items-center justify-center bg-gray-100 text-gray-400 text-sm">
               No Cover
             </div>
           )}
