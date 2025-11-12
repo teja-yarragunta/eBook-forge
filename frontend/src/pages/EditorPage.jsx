@@ -164,9 +164,16 @@ const EditorPage = () => {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
-      setBook(response.data);
+
+      // 👇 Safely handle both possible response shapes
+      const updatedBook = response.data.book || response.data;
+      setBook(updatedBook);
+
+      // 👇 Switch to BookDetails tab to show the new image
+      setActiveTab("details");
       toast.success("Cover image updated!");
     } catch (error) {
+      console.error("Upload error:", error.response?.data || error.message);
       toast.error("Failed to upload cover image.");
     } finally {
       setIsUploading(false);
