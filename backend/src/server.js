@@ -29,7 +29,7 @@ app.use("/api/ai", aiRouter);
 app.use("/api/export", exportRouter);
 
 // db connection and start server
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4000;
 connectDB()
   .then(() => {
     app.listen(PORT, () => {
