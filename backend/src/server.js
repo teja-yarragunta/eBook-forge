@@ -14,11 +14,16 @@ const app = express();
 //middleware
 app.use(express.json());
 // middleware to handle cors
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://e-book-forge.vercel.app",
+];
 app.use(
   cors({
-    origin: "*",
+    origin: allowedOrigins,
     methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
 
