@@ -18,27 +18,26 @@ const allowedOrigins = [
   "http://localhost:5173",
   "https://e-book-forge.vercel.app",
 ];
-
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin) return callback(null, true); // allow mobile/postman
+      if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {
-        callback(null, true);
+        return callback(null, true);
       } else {
-        callback(new Error("Not allowed by CORS"));
+        return callback(new Error("Not allowed by CORS"));
       }
     },
     credentials: true,
-    methods: "GET, POST, PUT, PATCH, DELETE",
-    allowedHeaders: "Content-Type, Authorization",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-
-// REQUIRED for OPTIONS preflight
-app.options("*", cors());
-
+// to test
+app.get("/", (req, res) => {
+  res.status(200).send("Backend working with CORS");
+});
 // routes
 app.use("/api/auth", authRouter);
 app.use("/api/books", bookRouter);
